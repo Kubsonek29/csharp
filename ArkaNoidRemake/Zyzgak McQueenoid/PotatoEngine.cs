@@ -163,6 +163,11 @@ namespace Zyzgak_McQueenoid
         }
         public void LoadTheGame()
         {
+            if(!File.Exists("save"))
+            {
+                MessageBox.Show("Brak pliku z zapisem");
+                return;
+            }
             Stream s = new FileStream("save", FileMode.Open);
             BinaryFormatter bw = new BinaryFormatter();
             Obstacles = (List<Obstacle>)bw.Deserialize(s);
