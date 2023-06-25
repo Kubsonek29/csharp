@@ -167,8 +167,32 @@ namespace Zyzgak_McQueenoid
             ///Obstacles
             foreach (var item in obstacles)
             {
+                //od prawej
+                if (Vx > 0 && locationX + Vx + EntitySizeWidth >= item.locationX && locationX + Vx + EntitySizeWidth <= item.locationX + Vx + EntitySizeWidth && locationY + Vy >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + item.EntitySizeHeight)
+                {
+                    AdjustPointsAndLives(item, ref score, false);
+                    return score;
+                }
+                //od lewej
+                else if (Vx < 0 && locationX + Vx <= item.locationX + item.EntitySizeWidth && locationX + Vx >= item.locationX + item.EntitySizeWidth + Vx && locationY + Vy >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + item.EntitySizeHeight)
+                {
+                    AdjustPointsAndLives(item, ref score, false);
+                    return score;
+                }
+                //od gory
+                if (Vy > 0 && locationX + Vx >= item.locationX && locationX + Vx <= item.locationX + item.EntitySizeWidth && locationY + Vy + EntitySizeHeight >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + Vy + EntitySizeHeight)
+                {
+                    AdjustPointsAndLives(item, ref score, true);
+                    return score;
+                }
+                //od dolu
+                else if (Vy < 0 && locationX + Vx >= item.locationX && locationX + Vx <= item.locationX + item.EntitySizeWidth && locationY + Vy <= item.locationY + item.EntitySizeHeight && locationY + Vy >= item.locationY + item.EntitySizeHeight + Vy)
+                {
+                    AdjustPointsAndLives(item, ref score, true);
+                    return score;
+                }
                 //lewy gorny ukos
-                if(Vy>0 && Vx>0 && locationX + Vx + EntitySizeWidth >= item.locationX && locationX + Vx + EntitySizeWidth <= item.locationX + Vx + EntitySizeWidth && locationY + Vy + EntitySizeHeight >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + Vy + EntitySizeHeight)
+                if (Vy>0 && Vx>0 && locationX + Vx + EntitySizeWidth >= item.locationX && locationX + Vx + EntitySizeWidth <= item.locationX + Vx + EntitySizeWidth && locationY + Vy + EntitySizeHeight >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + Vy + EntitySizeHeight)
                 {
                     item.ObstacleLives--;
                     if (item.ObstacleLives == 0)
@@ -225,31 +249,6 @@ namespace Zyzgak_McQueenoid
                     score += 10;
                     Vx = -Vx;
                     Vy = -Vy;
-                    return score;
-                }
-                
-                //od prawej
-                if (Vx > 0 && locationX+Vx+EntitySizeWidth >= item.locationX && locationX+Vx+EntitySizeWidth <= item.locationX+Vx+EntitySizeWidth && locationY+Vy >= item.locationY && locationY+Vy+EntitySizeHeight <= item.locationY + item.EntitySizeHeight)
-                {
-                    AdjustPointsAndLives(item, ref score, false);
-                    return score;
-                }
-                //od lewej
-                else if(Vx < 0 && locationX+Vx <= item.locationX+item.EntitySizeWidth && locationX+Vx >= item.locationX+item.EntitySizeWidth+Vx && locationY+Vy>=item.locationY && locationY+Vy+EntitySizeHeight <= item.locationY + item.EntitySizeHeight)
-                {
-                    AdjustPointsAndLives(item, ref score, false);
-                    return score;
-                }
-                //od gory
-                if (Vy > 0 && locationX + Vx >= item.locationX && locationX + Vx <= item.locationX + item.EntitySizeWidth && locationY + Vy + EntitySizeHeight >= item.locationY && locationY + Vy + EntitySizeHeight <= item.locationY + Vy + EntitySizeHeight)
-                {
-                    AdjustPointsAndLives(item, ref score, true);
-                    return score;
-                }
-                //od dolu
-                else if (Vy < 0 && locationX + Vx >= item.locationX && locationX+Vx <= item.locationX+item.EntitySizeWidth && locationY+Vy <= item.locationY+item.EntitySizeHeight && locationY + Vy >= item.locationY + item.EntitySizeHeight + Vy)
-                {
-                    AdjustPointsAndLives(item, ref score, true);
                     return score;
                 }
             }

@@ -32,12 +32,27 @@ namespace Zyzgak_McQueenoid
         {
             //double resizewidth = ((double)currentpanelwidth/(double)oldpanelwidth);
             //double resizeheight = ((double)currentpanelheight/(double)oldpanelheight);
+
             locationX = (int)(locationX*resizewidth);
             locationY = (int)(locationY*resizeheight);
-            Vx = (int)(Vx*resizewidth);
-            Vy = (int)(Vy*resizeheight);
-            EntitySizeHeight = (int)(EntitySizeHeight*resizeheight);
-            EntitySizeWidth = (int)(EntitySizeWidth*resizewidth);
+            if (this is Ball)
+            {
+                if (!((int)(EntitySizeHeight * resizeheight) < 20))
+                    EntitySizeHeight = (int)(EntitySizeHeight * resizeheight);
+                else
+                    EntitySizeHeight = 20;
+                if(!((int)(EntitySizeWidth * resizewidth) < 20))
+                    EntitySizeWidth = (int)(EntitySizeWidth * resizewidth);
+                else
+                    EntitySizeWidth = 20;
+            }
+            else
+            {
+                Vx = (int)(Vx * resizewidth);
+                Vy = (int)(Vy * resizeheight);
+                EntitySizeHeight = (int)(EntitySizeHeight * resizeheight);
+                EntitySizeWidth = (int)(EntitySizeWidth * resizewidth);
+            }
         }
     }
 }

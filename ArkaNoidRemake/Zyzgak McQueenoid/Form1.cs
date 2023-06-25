@@ -213,12 +213,14 @@ namespace Zyzgak_McQueenoid
         private void LoadGame_Click(object sender, EventArgs e)
         {
             ArkaNoidEngine.LoadTheGame();
+            ArkaNoidEngine.resumingcount = 3;
             StartGame_Click(sender, e);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             ArkaNoidEngine.SaveTheGame();
+            MessageBox.Show("The game was saved!");
         }
         private void ResumeGameAfterPausing(PaintEventArgs e)
         {

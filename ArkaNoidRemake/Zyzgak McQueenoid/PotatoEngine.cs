@@ -45,7 +45,7 @@ namespace Zyzgak_McQueenoid
             //Entities = new EntityDisplayKeyMove[2];
             //Entities[0] = tinyball; Entities[1] = tinyboard;
             Bonus = new Bonuses(-25,-25,0,10,Color.MediumPurple,Map, 40, 40, tinyboard, tinyballs);
-            currentlevel = 3;
+            currentlevel = 1;
         }
         public PotatoEngine(Paletka tinyboard, Ball tinyball, MapaGry Map, EntityDisplayKeyMove[] Entities)
         {
@@ -163,7 +163,7 @@ namespace Zyzgak_McQueenoid
         }
         public void LoadTheGame()
         {
-            if(!File.Exists("save"))
+            if (!File.Exists("save"))
             {
                 MessageBox.Show("Brak pliku z zapisem");
                 return;
@@ -181,10 +181,13 @@ namespace Zyzgak_McQueenoid
             currentlevel = (int)bw.Deserialize(s);
             highscore = (int)bw.Deserialize(s);
             score = (int)bw.Deserialize(s);
+            Bonus = (Bonuses)bw.Deserialize(s);
             //Entities[0] = tinyball; Entities[1] = tinyboard;
             tinyballs.Clear();
             tinyballs.Add(tinyball);
             tinyball.paddle = tinyboard;
+            Bonus.BigBalls = tinyballs;
+            Bonus.paddle = tinyboard;
             s.Close();
         }
         public void SaveTheGame()
@@ -201,12 +204,14 @@ namespace Zyzgak_McQueenoid
             bw.Serialize(s, currentlevel);
             bw.Serialize(s, highscore);
             bw.Serialize(s, score);
+            bw.Serialize(s, Bonus);
             s.Close();
         }
         public void resethegame()
         {
             tinyboard.PreparePaletkaToTheLevel();
             tinyball.followpaddle = true;
+            Bonus.forcemetodespawn();
             currentlevel = 1;
             PlayerLives = 3;
             score = 0;

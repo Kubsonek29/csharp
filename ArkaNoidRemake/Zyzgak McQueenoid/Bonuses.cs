@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Zyzgak_McQueenoid
 {
+    [Serializable]
     public class Bonuses : Entity, EntityDisplayKeyMove
     {
-        Paletka paddle;
-        List<Ball> BigBalls;
+        public Paletka paddle;
+        public List<Ball> BigBalls;
         Color BonusColor;
         bool active = false;
         int typeofBonus = 0;
@@ -57,15 +59,15 @@ namespace Zyzgak_McQueenoid
                             fixedVy = BigBalls[0].Vy;
                         if (BigBalls[0].locationX >= EntityMap.WidthOfMap / 2)
                         {
-                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth, BigBalls[0].locationY, -BigBalls[0].Vx, fixedVy, Color.Orchid, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
-                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth+5, BigBalls[0].locationY+5, -BigBalls[0].Vx, fixedVy, Color.OrangeRed, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
-                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth+10, BigBalls[0].locationY+10, -BigBalls[0].Vx, fixedVy, Color.DarkOliveGreen, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth, BigBalls[0].locationY, -BigBalls[0].Vx, fixedVy, Color.Orchid, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth+5, BigBalls[0].locationY+5, -BigBalls[0].Vx, fixedVy, Color.OrangeRed, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX + BigBalls[0].EntitySizeWidth+10, BigBalls[0].locationY+10, -BigBalls[0].Vx, fixedVy, Color.DarkOliveGreen, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
                         }
                         else
                         {
-                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth, BigBalls[0].locationY, -BigBalls[0].Vx, fixedVy, Color.Orange, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
-                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth-5, BigBalls[0].locationY-5, -BigBalls[0].Vx, fixedVy, Color.DarkSalmon, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
-                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth-10, BigBalls[0].locationY-10, -BigBalls[0].Vx, fixedVy, Color.DeepPink, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 5, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth, BigBalls[0].locationY, -BigBalls[0].Vx, fixedVy, Color.Orange, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth-5, BigBalls[0].locationY-5, -BigBalls[0].Vx, fixedVy, Color.DarkSalmon, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
+                            BigBalls.Add(new Ball(BigBalls[0].locationX - BigBalls[0].EntitySizeWidth-10, BigBalls[0].locationY-10, -BigBalls[0].Vx, fixedVy, Color.DeepPink, EntityMap, BigBalls[0].EntitySizeHeight - 10, BigBalls[0].EntitySizeWidth - 10, paddle, false));
                         }
                     }
                     else if(typeofBonus == 4)
@@ -97,8 +99,8 @@ namespace Zyzgak_McQueenoid
                 Random c1 = new Random();
                 if(c1.Next(1,30) == 5)
                 {
-                    //typeofBonus = c1.Next(1, 5); //od 1 do n-1
-                    typeofBonus = 3;
+                    typeofBonus = c1.Next(1, 5); //od 1 do n-1
+                    //typeofBonus = 3;
                     if (typeofBonus == 1)
                         BonusColor = Color.Yellow;
                     else if (typeofBonus == 2)
